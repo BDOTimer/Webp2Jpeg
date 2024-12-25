@@ -122,3 +122,59 @@
 1734451704 c:\workcb-2024\!projects\mytools-3-rc\conv_webp\webp2jpg-rc5\extlibs\webp\imageio\webpdec.h
 	"webp/decode.h"
 
+1735154830 source:c:\workcb-2024\!projects\mytools\conv_webp\webp2jpeg\project\sources\!main.cpp
+	"webp2jpeg.h"
+	<map>
+	<functional>
+
+1735155593 c:\workcb-2024\!projects\mytools\conv_webp\webp2jpeg\project\sources\webp2jpeg.h
+	"dec-Webp.h"
+	"mywrap_toojpeg.h"
+
+1735155297 c:\workcb-2024\!projects\mytools\conv_webp\webp2jpeg\project\sources\dec-webp.h
+	"imageio/image_enc.h"
+	"imageio/webpdec.h"
+	"files_collected.h"
+
+1734451703 c:\workcb-2024\!projects\mytools\conv_webp\webp2jpeg\project\extlibs\webp\imageio\image_enc.h
+	<stdio.h>
+	"webp/config.h"
+	"webp/types.h"
+	"webp/decode.h"
+
+1734451719 c:\workcb-2024\!projects\mytools\conv_webp\webp2jpeg\project\extlibs\webp\webp\types.h
+	<stddef.h>
+	<inttypes.h>
+
+1734451718 c:\workcb-2024\!projects\mytools\conv_webp\webp2jpeg\project\extlibs\webp\webp\decode.h
+	"./types.h"
+
+1734451704 c:\workcb-2024\!projects\mytools\conv_webp\webp2jpeg\project\extlibs\webp\imageio\webpdec.h
+	"webp/decode.h"
+
+1735149628 c:\workcb-2024\!projects\mytools\conv_webp\webp2jpeg\project\sources\files_collected.h
+	"myl.h"
+
+1735153136 c:\workcb-2024\!projects\mytools\conv_webp\webp2jpeg\project\sources\myl.h
+	<filesystem>
+	<algorithm>
+	<iostream>
+	<iterator>
+	<fstream>
+	<sstream>
+	<format>
+	<vector>
+	<string>
+	"config.h"
+	<windows.h>
+
+1735152852 c:\workcb-2024\!projects\mytools\conv_webp\webp2jpeg\project\sources\config.h
+	<string>
+
+1735153136 c:\workcb-2024\!projects\mytools\conv_webp\webp2jpeg\project\sources\mywrap_toojpeg.h
+	"toojpeg.h"
+	"files_collected.h"
+	"myl.h"
+
+1562567834 c:\workcb-2024\!projects\mytools\conv_webp\webp2jpeg\project\extlibs\toojpeg\toojpeg.h
+

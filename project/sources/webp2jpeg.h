@@ -118,16 +118,14 @@ int Webp2Jpeg::test()
 ///----------------------------------------------------------------------------:
 int run()
 {
-#ifdef    MYDEBUG
     std::cout << "СТАРТ КОНВЕРТЕРА *.webp ---> *.jpg ..." << std::endl;
-#endif // MYDEBUG
 
     int ver = WebPGetDecoderVersion();
 
     std::cout << "WebPGetDecoderVersion - "
-              << ((ver & 0xFF0000) >> 16) << '.'
-              << ((ver & 0xFF00  ) >>  8) << '.'
-              <<  (ver & 0xFF    ) << std::endl;
+              << ((ver >> 16)       ) << '.'
+              << ((ver >>  8) & 0xFF) << '.'
+              <<  (ver        & 0xFF) << std::endl;
 
     int err = Webp2Jpeg::test_work();
 

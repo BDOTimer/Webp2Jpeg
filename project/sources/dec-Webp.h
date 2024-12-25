@@ -69,7 +69,7 @@ private:
         /// Поставщик файлов.|
         ///------------------:
         FilesCargo filesCargo;
-                 l(filesCargo.info())
+                 l(filesCargo.debug())
 
         if(filesCargo.empty()) return;
 
