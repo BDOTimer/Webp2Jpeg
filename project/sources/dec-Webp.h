@@ -1,11 +1,6 @@
 #ifndef DEC_WEBP_H
 #define DEC_WEBP_H
 
-#include <iostream>
-#include <fstream>
-#include <vector>
-#include <iterator>
-
 #ifdef HAVE_CONFIG_H
 //#include "webp/config.h"
 #endif

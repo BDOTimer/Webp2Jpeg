@@ -4,6 +4,8 @@
 #include <filesystem>
 #include <algorithm>
 #include <iostream>
+#include <iterator>
+#include <fstream>
 #include <format>
 #include <vector>
 #include <string>
