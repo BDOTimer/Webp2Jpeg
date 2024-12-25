@@ -49,14 +49,14 @@ struct  myDecodeWebp    : Bitmap
         int success = WebPGetInfo  ( data, data_size, W, H );
             dataout = WebPDecodeRGB( data, data_size, W, H );
 
-        log1 << "------------------------log1:\n"
+        log1 << "----------------------------------------------log1:\n"
              << "  path.string()      : " << path.string     () << '\n'
              << "  path.parent_path() : " << path.parent_path() << '\n'
              << "  data_size          : " << data_size          << '\n'
              << "  success            : " << success            << '\n'
-             << "  Width  : " << *W       << '\n'
-             << "  Height : " << *H       << '\n'
-             << "----------------------------.";
+             << "  Width              : " << *W       << '\n'
+             << "  Height             : " << *H       << '\n'
+             << "--------------------------------------------------.";
 
         myls::output(log1);
 
