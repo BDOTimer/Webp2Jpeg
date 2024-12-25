@@ -47,11 +47,6 @@ struct  Webp2Jpeg
                 + fcargo.get_base_name_dest(++cnt)
             };
 
-            l(dir)
-
-            /// TODO: не пишет в русскую директорию...
-            /// Нужен std::wstring wfilename = win::utf8_to_wide(path.string());
-
             _2file.openfile(dir.string());
 
             ///---------------------------|
