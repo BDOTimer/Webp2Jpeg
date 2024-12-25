@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="webp2jpg-rc5" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Release">
+				<Option output="bin/webp2jpg-rc5" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin/" />
+				<Option object_output="obj/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add directory="extlibs/toojpeg" />
+					<Add directory="extlibs/webp" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add library="extlibs/libenc-Jpeg-lib.a" />
+					<Add library="extlibs/libwebp.a" />
+				</Linker>
+			</Target>
+			<Target title="Debug">
+				<Option output="bin/webp2jpg-rc5" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin/" />
+				<Option object_output="obj/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add option="-DMYDEBUG" />
+					<Add directory="extlibs/toojpeg" />
+					<Add directory="extlibs/webp" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add library="extlibs/libenc-Jpeg-lib.a" />
+					<Add library="extlibs/libwebp.a" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+		</Compiler>
+		<Unit filename="doc.txt" />
+		<Unit filename="res/icon.rc">
+			<Option compilerVar="WINDRES" />
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="sources/!main.cpp" />
+		<Unit filename="sources/config.h" />
+		<Unit filename="sources/dec-Webp.h" />
+		<Unit filename="sources/files_collected.h" />
+		<Unit filename="sources/myl.h" />
+		<Unit filename="sources/mywrap_toojpeg.h" />
+		<Unit filename="sources/webp2jpeg.h" />
+		<Extensions />
+	</Project>
+</CodeBlocks_project_file>

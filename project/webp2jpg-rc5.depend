@@ -1,0 +1,124 @@
+# depslib dependency file v1.0
+1735028341 source:c:\!test-2024\projects\mytools-3-rc\conv_webp\webp2jpg-rc5\sources\!main.cpp
+	<iostream>
+	"webp2jpeg.h"
+
+1735027404 c:\!test-2024\projects\mytools-3-rc\conv_webp\webp2jpg-rc5\sources\webp2jpeg.h
+	"dec-Webp.h"
+
+1735027937 c:\!test-2024\projects\mytools-3-rc\conv_webp\webp2jpg-rc5\sources\dec-webp.h
+	<iostream>
+	<fstream>
+	<vector>
+	<iterator>
+	"files_collected.h"
+	"mywrap_toojpeg.h"
+	"imageio/image_enc.h"
+	"imageio/webpdec.h"
+	"myl.h"
+
+1735030865 c:\!test-2024\projects\mytools-3-rc\conv_webp\webp2jpg-rc5\sources\files_collected.h
+	"myl.h"
+
+1735030400 c:\!test-2024\projects\mytools-3-rc\conv_webp\webp2jpg-rc5\sources\mywrap_toojpeg.h
+	"toojpeg.h"
+	"files_collected.h"
+	<iostream>
+	<fstream>
+	<sstream>
+	<vector>
+	"myl.h"
+
+1562567834 c:\!test-2024\projects\mytools-3-rc\conv_webp\webp2jpg-rc5\extlibs\toojpeg\toojpeg.h
+
+1734451703 c:\!test-2024\projects\mytools-3-rc\conv_webp\webp2jpg-rc5\extlibs\webp\imageio\image_enc.h
+	<stdio.h>
+	"webp/config.h"
+	"webp/types.h"
+	"webp/decode.h"
+
+1734451719 c:\!test-2024\projects\mytools-3-rc\conv_webp\webp2jpg-rc5\extlibs\webp\webp\types.h
+	<stddef.h>
+	<inttypes.h>
+
+1734451718 c:\!test-2024\projects\mytools-3-rc\conv_webp\webp2jpg-rc5\extlibs\webp\webp\decode.h
+	"./types.h"
+
+1734451704 c:\!test-2024\projects\mytools-3-rc\conv_webp\webp2jpg-rc5\extlibs\webp\imageio\webpdec.h
+	"webp/decode.h"
+
+1735027533 c:\!test-2024\projects\mytools-3-rc\conv_webp\webp2jpg-rc5\sources\myl.h
+	"config.h"
+	<windows.h>
+
+1735030400 c:\!test-2024\projects\mytools-3-rc\conv_webp\webp2jpg-rc5\sources\config.h
+	<filesystem>
+	<algorithm>
+	<iostream>
+	<format>
+	<vector>
+	<string>
+
+1735104590 source:c:\workcb-2024\!projects\mytools-3-rc\conv_webp\webp2jpg-rc5\res\icon.rc
+
+1735115694 source:c:\workcb-2024\!projects\mytools-3-rc\conv_webp\webp2jpg-rc5\sources\!main.cpp
+	"webp2jpeg.h"
+	<map>
+	<functional>
+
+1735115986 c:\workcb-2024\!projects\mytools-3-rc\conv_webp\webp2jpg-rc5\sources\webp2jpeg.h
+	"dec-Webp.h"
+
+1735112404 c:\workcb-2024\!projects\mytools-3-rc\conv_webp\webp2jpg-rc5\sources\dec-webp.h
+	<iostream>
+	<fstream>
+	<vector>
+	<iterator>
+	"files_collected.h"
+	"mywrap_toojpeg.h"
+	"imageio/image_enc.h"
+	"imageio/webpdec.h"
+	"myl.h"
+
+1735115392 c:\workcb-2024\!projects\mytools-3-rc\conv_webp\webp2jpg-rc5\sources\files_collected.h
+	"myl.h"
+
+1735115392 c:\workcb-2024\!projects\mytools-3-rc\conv_webp\webp2jpg-rc5\sources\myl.h
+	"config.h"
+	<windows.h>
+
+1735114100 c:\workcb-2024\!projects\mytools-3-rc\conv_webp\webp2jpg-rc5\sources\config.h
+	<filesystem>
+	<algorithm>
+	<iostream>
+	<format>
+	<vector>
+	<string>
+
+1735031376 c:\workcb-2024\!projects\mytools-3-rc\conv_webp\webp2jpg-rc5\sources\mywrap_toojpeg.h
+	"toojpeg.h"
+	"files_collected.h"
+	<iostream>
+	<fstream>
+	<sstream>
+	<vector>
+	"myl.h"
+
+1562567834 c:\workcb-2024\!projects\mytools-3-rc\conv_webp\webp2jpg-rc5\extlibs\toojpeg\toojpeg.h
+
+1734451703 c:\workcb-2024\!projects\mytools-3-rc\conv_webp\webp2jpg-rc5\extlibs\webp\imageio\image_enc.h
+	<stdio.h>
+	"webp/config.h"
+	"webp/types.h"
+	"webp/decode.h"
+
+1734451719 c:\workcb-2024\!projects\mytools-3-rc\conv_webp\webp2jpg-rc5\extlibs\webp\webp\types.h
+	<stddef.h>
+	<inttypes.h>
+
+1734451718 c:\workcb-2024\!projects\mytools-3-rc\conv_webp\webp2jpg-rc5\extlibs\webp\webp\decode.h
+	"./types.h"
+
+1734451704 c:\workcb-2024\!projects\mytools-3-rc\conv_webp\webp2jpg-rc5\extlibs\webp\imageio\webpdec.h
+	"webp/decode.h"
+
