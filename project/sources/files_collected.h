@@ -38,8 +38,6 @@ struct  FilesCargo : std::vector<fs::path>
             }
         }
 
-        std::sort(d.begin(), d.end());
-
         this->log     ();
         this->log_must();
     }
