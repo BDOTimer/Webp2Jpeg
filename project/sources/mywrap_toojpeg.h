@@ -4,11 +4,6 @@
 #include "toojpeg.h"
 #include "files_collected.h"
 
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include <vector>
-
 #include "myl.h"
 
 ///----------------------------------------------------------------------------|

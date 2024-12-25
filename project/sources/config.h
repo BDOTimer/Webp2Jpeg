@@ -3,6 +3,16 @@
 
 #include <string>
 
+#ifdef  MYDEBUG
+    #define  l(a) std::cout << #a << " = " << a << '\n';
+    #define lp(a) std::cout << #a << " = " << a << '\n'; std::cin.get();
+#else
+    #define  l(a)
+    #define lp(a)
+#endif // MYDEBUG
+
+extern const char* LOGOVERSION;
+
 ///----------------------------------------------------------------------------|
 /// Дефолтные флаги для строки аргументов(в случаее пустой строки):
 ///     -depth_recursive:0
@@ -17,10 +27,11 @@ struct  Config
         {   std::system("chcp 65001");
         }
 
-    const char* const EXE_NAME = "webp2jpg-rc5";
+    std::string EXE_NAME     = "webp2jpg-rc5";
+    const char* LOGOVERSION  = ::LOGOVERSION;
 
-    const std::string source   = ".webp";
-    const std::string dest     = ".jpg" ;
+    const std::string source = ".webp";
+    const std::string dest   = ".jpg" ;
 
     int  depth  =     1; /// Глубина вложенности для подпапок.
     bool is_log =  true; /// Вести лог.
@@ -39,6 +50,14 @@ struct  Config
     bool          downsample  =   false;
 
     std::string   basename    = "img"  ;
+
+    void init_filename(std::string_view dir)
+    {
+        auto   p = dir.rfind("\\") + 1;
+        EXE_NAME = dir.substr(p, dir.size() - p);
+
+        l(EXE_NAME)
+    }
 };
 
 extern Config _cfg;

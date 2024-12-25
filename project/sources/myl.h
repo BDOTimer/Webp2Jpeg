@@ -6,6 +6,7 @@
 #include <iostream>
 #include <iterator>
 #include <fstream>
+#include <sstream>
 #include <format>
 #include <vector>
 #include <string>
@@ -13,15 +14,6 @@
 #include "config.h"
 
 namespace fs = std::filesystem;
-
-#ifdef  MYDEBUG
-    #define  l(a) std::cout << #a << " = " << a << '\n';
-    #define lp(a) std::cout << #a << " = " << a << '\n'; std::cin.get();
-#else
-    #define  l(a)
-    #define lp(a)
-#endif // MYDEBUG
-
 
 ///----------------------------------------------------------------------------|
 /// WinAPI.

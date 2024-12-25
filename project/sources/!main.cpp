@@ -1,6 +1,6 @@
 const char* LOGOVERSION =    R"(
 ///------------------------------|
-/// Webp2Jpeg-2024, версия:0.4.0 |
+/// Webp2Jpeg-2024, версия:0.4.1 |
 ///------------------------------|
 ///----------------------------------------------------------------------------|
 /// Конвертер *.webp ---> *.jpg
@@ -39,6 +39,8 @@ void minitest()
 int main(int argc, char* argv[])
 {
     myls::output(LOGOVERSION);
+
+    _cfg.init_filename(argv[0]);
 
     if(argc == 1)
     {   void createbat(); createbat();
