@@ -26,6 +26,8 @@ struct  Config
 {       Config()
         {   std::system("chcp 65001");
         }
+        Config          (const Config&) = delete;
+        Config operator=(const Config&) = delete;
 
     std::string EXE_NAME     = "webp2jpg-rc5";
     const char* LOGOVERSION  = ::LOGOVERSION;
