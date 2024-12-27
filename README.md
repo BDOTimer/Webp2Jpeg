@@ -39,7 +39,7 @@
 ### Как это скомпилировать?
  - понадобиться Code::Blocks
  - сам проект отсюда.
- - открыть в C::B [воркспейс Tools.workspace](Project/Tools.workspace).
+ - открыть в C::B [воркспейс Tools.workspace](Project/).
  - нажать ребилд.
  - готово.
 ---
