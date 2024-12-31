@@ -102,7 +102,7 @@ struct  Encode2Jpeg
     bool        downsample = _cfg.downsample;
     const char* comment    = "xlat-code"; // arbitrary JPEG comment
 
-    int go(const Bitmap& bmp)
+    err_t go(const Bitmap& bmp)
     {
         auto ok = TooJpeg::writeJpeg
         (
@@ -110,7 +110,7 @@ struct  Encode2Jpeg
              bmp.datain     , (ushort)(bmp.width), (ushort)(bmp.height),
              isRGB          , quality  , downsample, comment
         );
-        return ok ? 0 : 1;
+        return !ok;
     }
 
     void openfile(std::string_view filename)

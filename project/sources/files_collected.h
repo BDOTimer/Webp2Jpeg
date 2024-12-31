@@ -23,36 +23,53 @@ struct  FilesCargo : std::vector<fs::path>
             {   ifile.pop( );
 
                 if(ifile == END) break;
-
-                continue;
             }
 
-            const auto ext = ifile->path().extension().string();
+            {   const auto& ext = ifile->path().extension().string();
 
-            if(ext == _cfg.source)
-            {   push_back(ifile->path());
-            }
-            else
-            if(ext == _cfg.dest)
-            {   d.push_back(ifile->path());
+                if(ext == _cfg.source)
+                {   push_back(ifile->path());
+                }
+                else
+                if(ext == _cfg.dest)
+                {   dest.push_back(ifile->path());
+                }
             }
         }
+
+        l(dest.size())
 
         this->log     ();
         this->log_must();
     }
 
+    unsigned get_percent(unsigned i)
+    {   return (100 * i) / size();
+    }
+
     std::string debug()
     {   std::string s(std::string("size: ") + std::to_string(size()) + '\n');
+
+        s += "|------------------Webp:\n";
 
         for(const fs::path& path : *this)
         {
             s += path.string();
             s += "\n";
         }
-        s += "get_base_name_dest(0) = ";
-        s +=  get_base_name_dest(0);
+
+        s += "|------------------Jpeg:\n";
+
+        for(const fs::path& path : dest)
+        {
+            s += path.string();
+            s += "\n";
+        }
+
+        s += "get_filename_dest() = ";
+        s +=  get_filename_dest();
         s += "\n";
+
         return s ;
     }
 
@@ -62,15 +79,8 @@ struct  FilesCargo : std::vector<fs::path>
         std::cout << filesCargo.debug() << '\n';
     }
 
-    std::string get_base_name_dest(int n)
-    {
-        n += d.size();
-
-        std::string start{_cfg.basename};
-
-        return std::format(
-            "{}{}{}{}", start, '_', std::to_string(n), _cfg.dest
-        );
+    std::string        get_filename_dest()
+    {   return Config::get_filename_dest(_cfg, dest.size()+1);
     }
 
     static void remove(const fs::path& path)
@@ -88,7 +98,7 @@ struct  FilesCargo : std::vector<fs::path>
     }
 
 private:
-    std::vector<fs::path> d{};
+    std::vector<fs::path> dest{};
 };
 
 #endif // FILE_COLLECTED_H

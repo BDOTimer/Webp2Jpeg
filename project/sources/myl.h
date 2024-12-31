@@ -123,6 +123,28 @@ struct myls
     static void output(const std::string_view log)
     {   std::cout << log << '\n';
     }
+
+    static std::string_view trim_prefix(std::string_view s)
+    {   s.remove_prefix(std::distance(s.cbegin(),
+                                      std::find_if(s.cbegin(), s.cend(),
+            [](int c) {return !std::isspace(c);}))
+        );
+        return s;
+    }
+
+    static std::string_view trim_suffix(std::string_view s)
+    {   s.remove_suffix(std::distance(s.crbegin(),
+                                      std::find_if(s.crbegin(), s.crend(),
+            [](int c) {return !std::isspace(c);}))
+        );
+        return s;
+    }
+
+    static std::string_view trim(std::string_view s)
+    {   return trim_prefix(
+               trim_suffix(s)
+        );
+    }
 };
 
 using ushort = unsigned short;

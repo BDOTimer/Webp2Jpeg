@@ -1,6 +1,6 @@
 const char* LOGOVERSION =    R"(
 ///------------------------------|
-/// Webp2Jpeg-2024, версия:0.4.2 |
+/// Webp2Jpeg-2024, версия:0.4.3 |
 ///------------------------------|
 ///----------------------------------------------------------------------------|
 /// Конвертер *.webp ---> *.jpg
@@ -28,7 +28,7 @@ bool tests()
     return true;
 }
 
-void minitest()
+void nanotest()
 {
 /// ...
 }
@@ -38,6 +38,8 @@ void minitest()
 ///----------------------------------------------------------------------------:
 int main(int argc, char* argv[])
 {
+    nanotest();
+
     myls::output(LOGOVERSION);
 
     _cfg.init_filename(argv[0]);
@@ -60,19 +62,6 @@ int main(int argc, char* argv[])
 
 using foo_t = std::function<void(std::string)>;
 using S     = const std::string&;
-
-constexpr const char* HELP_STR = R"(
-///------------------------------------------------------------------------Help:
-/// Дефолтные флаги для строки аргументов:
-///   -depth_recursive: {} - глубина рекурсии для поиска входных файлов.
-///   -is_log:          {} - включить логирование.
-///   -remove_webm:     {} - удалять отсканированные входные файлы.
-///   -quality:         {} - качество jpeg.
-///   -better_smaller:  {} - лучше(false) или меньше(true).
-///   -basename:        {} - корень имени для выходных файлов.
-///   -h                {} - справка.
-///----------------------------------------------------------------------------.
-)";
 
 static const std::array<foo_t, 6> F
 {
@@ -100,7 +89,7 @@ struct  ConsoleArg
             if(dic.size()+1 < (unsigned)argc-1)
             {   std::cerr << "ERROR:ConsoleArg!\n";
             }
-            else info(argc, argv);
+            else load2cfg(argc, argv);
 
             if(ishelp)
             {
@@ -111,7 +100,7 @@ struct  ConsoleArg
 private:
     bool ishelp{false};
 
-    void info(int argc, char* argv[])
+    void load2cfg(int argc, char* argv[])
     {
         for (int i = 1; i < argc; ++i)
         {
@@ -122,6 +111,7 @@ private:
                     ishelp = true;
                 }
                 else step_one(argv[i]);
+
             }
             catch(std::string err)
             {   std::cerr << "\n>>>" << err  << "!!!\n\n";;
@@ -134,13 +124,17 @@ private:
 
     static void step_one(std::string s)
     {   auto p  = s.find(":");
-        auto s1 = s.substr(0, p++);
-        auto s2 = s.substr(p, s.size() - p);
+        std::string s1 = s.substr(0, p++);
+        std::string s2 = s.substr(p, s.size() - p);
+
+        l(s1)
+        l(s2)
+        l(s2.size())
 
         if(auto i = dic.find(s1); i != dic.end())
         {
             try
-            {   i->second(s2);
+            {   i->second(std::string(trim(s2)));
             }
             catch(...)
             {   throw std::string("Argument value is ERROR: ") + s2;
@@ -151,20 +145,18 @@ private:
 
     static std::string bool2str(bool b)
     {   std::string s(b ? "true" : "false");
-        s.resize(_cfg.basename.size(), ' ');
+        s.resize(_cfg.get_etalon_length(), ' ');
         return s;
     }
 
     static std::string int2str(int n)
     {   std::string s = std::to_string(n);
-        s.resize(_cfg.basename.size(), ' ');
+        s.resize(_cfg.get_etalon_length(), ' ');
         return s;
     }
 
     static void info_helpstr(std::ostream& o, Config& cfg)
     {
-        if(cfg.basename.size() < 5) cfg.basename.resize(5, ' ');
-
         o << std::format( HELP_STR  ,
              int2str(cfg.depth     ),
             bool2str(cfg.is_log    ),
@@ -175,6 +167,10 @@ private:
             std::string(cfg.basename.size(), ' ')
         );
     }
+
+    static std::string_view trim(std::string_view s)
+    {   return myls::trim_suffix(s);
+    }
 };
 
 void     start_ConsoleArg(Config& cfg, int argc, char* argv[])
@@ -184,8 +180,7 @@ void     start_ConsoleArg(Config& cfg, int argc, char* argv[])
 void createbat()
 {
     if(!std::ifstream("run_W2J(with_config).bat").is_open())
-    {
-        std::ofstream("run_W2J(with_config).bat")
+    {   std::ofstream("run_W2J(with_config).bat")
              << "::---------------------------------------------------------|\n"
              << ":: Дефолтная конфигурация, т.е. конфиг по умолчанию.       |\n"
              << "::---------------------------------------------------------:\n"

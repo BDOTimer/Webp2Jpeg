@@ -2,16 +2,32 @@
 #define CONFIG_H
 
 #include <string>
+#include <format>
 
 #ifdef  MYDEBUG
-    #define  l(a) std::cout << #a << " = " << a << '\n';
-    #define lp(a) std::cout << #a << " = " << a << '\n'; std::cin.get();
+    #define  l(a)  std::cout << #a << " = " << a << '\n';
+    #define lp(a)  std::cout << #a << " = " << a << '\n'; std::cin.get();
+    #define SIGNAL std::cout << "SIGNAL\n";
 #else
     #define  l(a)
     #define lp(a)
+    #define SIGNAL
 #endif // MYDEBUG
 
 extern const char* LOGOVERSION;
+
+constexpr const char* HELP_STR = R"(
+///------------------------------------------------------------------------Help:
+/// Дефолтные флаги для строки аргументов:
+///   -depth_recursive: {} - глубина рекурсии для поиска входных файлов.
+///   -is_log:          {} - включить логирование.
+///   -remove_webm:     {} - удалять отсканированные входные файлы.
+///   -quality:         {} - качество jpeg.
+///   -better_smaller:  {} - лучше(false) или меньше(true).
+///   -basename:        {} - корень имени для выходных файлов.
+///   -h                {} - справка.
+///----------------------------------------------------------------------------.
+)";
 
 ///----------------------------------------------------------------------------|
 /// Дефолтные флаги для строки аргументов(в случаее пустой строки):
@@ -53,12 +69,22 @@ struct  Config
 
     std::string   basename    = "img"  ;
 
+    static std::string get_filename_dest(const Config& cfg, unsigned n)
+    {   return std::format(
+            "{}_{}{}", cfg.basename, std::to_string(n), cfg.dest
+        );
+    }
+
     void init_filename(std::string_view dir)
     {
         auto   p = dir.rfind("\\") + 1;
         EXE_NAME = dir.substr(p, dir.size() - p);
 
         l(EXE_NAME)
+    }
+
+    unsigned get_etalon_length() const
+    {   return basename.size() < 5 ? 5 : basename.size();
     }
 };
 

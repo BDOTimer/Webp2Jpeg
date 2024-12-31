@@ -20,7 +20,7 @@ struct  Webp2Jpeg
         {   log << "Нет файлов *.webp!\n"; return 0;
         }
 
-        log << "fcargo.size() = " << fcargo.size() << '\n';
+        log << "Найдено всего webp-файлов: " << fcargo.size() << '\n';
         log <<  fcargo.debug();
 
         ///-------------------------------|
@@ -33,18 +33,28 @@ struct  Webp2Jpeg
         ///-------------------------------:
         myDecodeWebp decodeWebp;
 
-        int cnt = 0;
+        unsigned cnt = 0;
 
         for(const auto& path : fcargo)
         {
+            ++cnt;
+
+            log1 << "----------------------------------------------log1:\n";
+
             log << "  " << path.string() << '\n';
 
-            decodeWebp.go(path);
+            err_t err = decodeWebp.go(path);
+            if   (err)
+            {
+                log1 << "  ERROR: decodeWebp\n";
+                myls::output(log1);
+                continue;
+            }
 
             fs::path dir{
                 path.parent_path().string()
                 + "\\"
-                + fcargo.get_base_name_dest(++cnt)
+                + fcargo.get_filename_dest()
             };
 
             _2file.openfile(dir.string());
@@ -53,11 +63,25 @@ struct  Webp2Jpeg
             /// Кодировщик в файл.        |
             ///---------------------------:
             Encode2Jpeg encode2Jpeg(_2file);
-            int err = encode2Jpeg.go(decodeWebp);
+            err = encode2Jpeg.go(decodeWebp);
 
-            if(err == 1) return 1;
+            if(err)
+            {
+                log1 << "  ERROR: encode2Jpeg\n";
+            }
+            else
+            {
+                log1 << "  Success!\n" << '\n';
 
-            if(_cfg.remove) FilesCargo::remove(path);
+                if (_cfg.remove) FilesCargo::remove(path);
+            }
+
+            log1 << "--------------------------------------------------.";
+
+            ///---------------------------|
+            /// Показать инфу об итерации.|
+            ///---------------------------:
+            myls::output(log1);
         }
         return 0;
     }
@@ -91,7 +115,7 @@ int Webp2Jpeg::test()
     /// Файл для записи данных.       |
     ///-------------------------------:
     _2File _2file;
-           _2file.openfile(fcargo.get_base_name_dest(2024));
+           _2file.openfile(fcargo.get_filename_dest());
 
     ///-------------------------------|
     /// myDecodeWebp битмапы.         |
@@ -111,7 +135,7 @@ int Webp2Jpeg::test()
 ///----------------------------------------------------------------------------|
 /// run.
 ///----------------------------------------------------------------------------:
-int run()
+inline int run()
 {
     std::cout << "СТАРТ КОНВЕРТЕРА *.webp ---> *.jpg ..." << std::endl;
 
