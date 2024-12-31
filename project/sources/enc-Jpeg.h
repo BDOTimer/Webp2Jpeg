@@ -1,8 +1,8 @@
-#ifndef MYWRAP_TOOJPEG_H
-#define MYWRAP_TOOJPEG_H
+#ifndef ENC_JPEG_H
+#define ENC_JPEG_H
 
 #include "toojpeg.h"
-#include "files_collected.h"
+#include "files-cargo.h"
 
 #include "myl.h"
 
@@ -165,5 +165,5 @@ int Encode2Jpeg::test()
     return ok;
 }
 
-#endif // MYWRAP_TOOJPEG_H
+#endif // ENC_JPEG_H
 

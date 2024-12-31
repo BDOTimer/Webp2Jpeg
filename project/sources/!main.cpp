@@ -6,6 +6,7 @@ const char* LOGOVERSION =    R"(
 /// Конвертер *.webp ---> *.jpg
 ///----------------------------------------------------------------------------:
 )";
+
 #include "webp2jpeg.h"
 
 Config _cfg;
@@ -45,7 +46,7 @@ int main(int argc, char* argv[])
     _cfg.init_filename(argv[0]);
 
     if(argc == 1)
-    {   void createbat(); createbat();
+    {   Config::createbat(_cfg);
     }
     else
     {   void start_ConsoleArg(Config& cfg, int argc, char* argv[]);
@@ -177,20 +178,4 @@ void     start_ConsoleArg(Config& cfg, int argc, char* argv[])
 {   ConsoleArg ConsoleArg(        cfg,     argc,       argv);
 }
 
-void createbat()
-{
-    if(!std::ifstream("run_W2J(with_config).bat").is_open())
-    {   std::ofstream("run_W2J(with_config).bat")
-             << "::---------------------------------------------------------|\n"
-             << ":: Дефолтная конфигурация, т.е. конфиг по умолчанию.       |\n"
-             << "::---------------------------------------------------------:\n"
-             << _cfg.EXE_NAME << ' '
-             << "-depth_recursive:0 "
-             << "-is_log:true "
-             << "-remove_webm:true "
-             << "-quality:90 "
-             << "-better_smaller:false "
-             << "-basename:img -h\n\npause" << std::endl;
-    }
-}
 

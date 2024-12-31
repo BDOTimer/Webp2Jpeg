@@ -86,6 +86,23 @@ struct  Config
     unsigned get_etalon_length() const
     {   return basename.size() < 5 ? 5 : basename.size();
     }
+
+    static void createbat(const Config& cfg)
+    {
+        if(!std::ifstream("run_W2J(with_config).bat").is_open())
+        {   std::ofstream("run_W2J(with_config).bat")
+             << "::---------------------------------------------------------|\n"
+             << ":: Дефолтная конфигурация, т.е. конфиг по умолчанию.       |\n"
+             << "::---------------------------------------------------------:\n"
+             << cfg.EXE_NAME << ' '
+             << "-depth_recursive:0 "
+             << "-is_log:true "
+             << "-remove_webm:true "
+             << "-quality:90 "
+             << "-better_smaller:false "
+             << "-basename:img -h\n\npause" << std::endl;
+        }
+    }
 };
 
 extern Config _cfg;

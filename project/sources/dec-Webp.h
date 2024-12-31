@@ -7,7 +7,7 @@
 
 #include "imageio/image_enc.h"
 #include "imageio/webpdec.h"
-#include "files_collected.h"
+#include "files-cargo.h"
 
 using buf_t = std::vector<uint8_t>;
 

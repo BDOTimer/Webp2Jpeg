@@ -1,5 +1,5 @@
-#ifndef FILE_COLLECTED_H
-#define FILE_COLLECTED_H
+#ifndef FILES_CARGO_H
+#define FILES_CARGO_H
 ///-----------------------------------------------------------------------------
 /// Файловый коллектор.
 ///----------------------------------------------------------------------------:
@@ -66,8 +66,8 @@ struct  FilesCargo : std::vector<fs::path>
             s += "\n";
         }
 
-        s += "get_filename_dest() = ";
-        s +=  get_filename_dest();
+        s += "get_filename_dest(0) = ";
+        s +=  get_filename_dest(0);
         s += "\n";
 
         return s ;
@@ -79,8 +79,8 @@ struct  FilesCargo : std::vector<fs::path>
         std::cout << filesCargo.debug() << '\n';
     }
 
-    std::string        get_filename_dest()
-    {   return Config::get_filename_dest(_cfg, dest.size()+1);
+    std::string        get_filename_dest(unsigned n)
+    {   return Config::get_filename_dest(_cfg, dest.size()+n);
     }
 
     static void remove(const fs::path& path)
@@ -101,5 +101,5 @@ private:
     std::vector<fs::path> dest{};
 };
 
-#endif // FILE_COLLECTED_H
+#endif // FILES_CARGO_H
 
