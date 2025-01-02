@@ -54,6 +54,7 @@
 		</Unit>
 		<Unit filename="sources/!main.cpp" />
 		<Unit filename="sources/config.h" />
+		<Unit filename="sources/console-args.h" />
 		<Unit filename="sources/dec-Webp.h" />
 		<Unit filename="sources/enc-Jpeg.h" />
 		<Unit filename="sources/files-cargo.h" />

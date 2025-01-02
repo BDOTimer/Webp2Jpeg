@@ -44,11 +44,12 @@ struct  myDecodeWebp    : Bitmap
         int success = WebPGetInfo  ( data, data_size, W, H );
             dataout = WebPDecodeRGB( data, data_size, W, H );
 
-        log1 << "  path.string()      : " << path.string     () << '\n'
-             << "  path.parent_path() : " << path.parent_path() << '\n'
-             << "  data_size          : " << data_size          << '\n'
-             << "  Width              : " << *W       << '\n'
-             << "  Height             : " << *H       << '\n';
+        log1 << std::format(
+                "  file in            : {}: [{}]\n", path.string(), data_size)
+             << std::format(
+                "  path.parent_path() : {}\n", path.parent_path().string())
+             << std::format(
+                "  image size         : {} x {}\n", *W, *H);
 
         Bitmap::datain = (uchar*)dataout;
 

@@ -67,13 +67,16 @@ struct  Webp2Jpeg
 
             if(err = encode2Jpeg.go(decodeWebp); err)
             {
-                log1 << "  ERROR: encode2Jpeg\n";
+                log1 << "  status             : ERROR ...\n";
             }
             else
             {
-                log1 << "  " << dir_dest
-                     << ": " << fs::file_size(dir_dest) << '\n'
-                     << "  Success!";
+                _2file.close();
+
+                log1 << "  file out           : "
+                     << dir_dest.string()
+                     << ": [" << fs::file_size(dir_dest) << "]\n"
+                     << "  status             : SUCSSES!";
 
                 if (_cfg.remove) FilesCargo::remove(path);
             }

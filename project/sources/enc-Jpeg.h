@@ -9,7 +9,7 @@
 ///----------------------------------------------------------------------------|
 /// Куда будем писать?!
 ///----------------------------------------------------------------------------:
-struct  _2File : protected std::ofstream
+struct  _2File : std::ofstream
 {       _2File(std::string_view filename) : filename(filename)
         {
             setout  (this    );
