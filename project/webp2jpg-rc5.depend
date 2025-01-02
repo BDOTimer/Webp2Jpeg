@@ -122,19 +122,18 @@
 1734451704 c:\workcb-2024\!projects\mytools-3-rc\conv_webp\webp2jpg-rc5\extlibs\webp\imageio\webpdec.h
 	"webp/decode.h"
 
-1735655964 source:c:\workcb-2024\!projects\mytools\conv_webp\webp2jpeg\project\sources\!main.cpp
+1735856042 source:c:\workcb-2024\!projects\mytools\conv_webp\webp2jpeg\project\sources\!main.cpp
+	"console-args.h"
 	"webp2jpeg.h"
-	<map>
-	<functional>
 
-1735650284 c:\workcb-2024\!projects\mytools\conv_webp\webp2jpeg\project\sources\webp2jpeg.h
+1735856042 c:\workcb-2024\!projects\mytools\conv_webp\webp2jpeg\project\sources\webp2jpeg.h
 	"dec-Webp.h"
-	"mywrap_toojpeg.h"
+	"enc-Jpeg.h"
 
-1735637707 c:\workcb-2024\!projects\mytools\conv_webp\webp2jpeg\project\sources\dec-webp.h
+1735856042 c:\workcb-2024\!projects\mytools\conv_webp\webp2jpeg\project\sources\dec-webp.h
 	"imageio/image_enc.h"
 	"imageio/webpdec.h"
-	"files_collected.h"
+	"files-cargo.h"
 
 1734451703 c:\workcb-2024\!projects\mytools\conv_webp\webp2jpeg\project\extlibs\webp\imageio\image_enc.h
 	<stdio.h>
@@ -168,7 +167,7 @@
 	"config.h"
 	<windows.h>
 
-1735655490 c:\workcb-2024\!projects\mytools\conv_webp\webp2jpeg\project\sources\config.h
+1735672834 c:\workcb-2024\!projects\mytools\conv_webp\webp2jpeg\project\sources\config.h
 	<string>
 	<format>
 
@@ -180,4 +179,17 @@
 1562567834 c:\workcb-2024\!projects\mytools\conv_webp\webp2jpeg\project\extlibs\toojpeg\toojpeg.h
 
 1735509478 source:c:\workcb-2024\!projects\mytools\conv_webp\webp2jpeg\project\res\icon.rc
+
+1735860313 c:\workcb-2024\!projects\mytools\conv_webp\webp2jpeg\project\sources\console-args.h
+	"myl.h"
+	<map>
+	<functional>
+
+1735673499 c:\workcb-2024\!projects\mytools\conv_webp\webp2jpeg\project\sources\files-cargo.h
+	"myl.h"
+
+1735856042 c:\workcb-2024\!projects\mytools\conv_webp\webp2jpeg\project\sources\enc-jpeg.h
+	"toojpeg.h"
+	"files-cargo.h"
+	"myl.h"
 

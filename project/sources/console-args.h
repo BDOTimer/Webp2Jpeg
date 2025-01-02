@@ -9,36 +9,36 @@
 #include <map>
 #include <functional>
 
-using foo_t = std::function<void(std::string)>;
-using S     = const std::string&;
-
 struct  ConsoleArg
-{       ConsoleArg(Config& cfg, int argc, char* argv[])
+{       ConsoleArg(Config& c, int argc, char* argv[]) : cfg(c)
         {
             if(dic.size()+1 < (unsigned)argc-1)
-            {   std::cerr << "ERROR:ConsoleArg!\n";
+            {   std::cout << "ERROR:ConsoleArg!\n"
+                          << "Будет загружена дефолтная настройка...\n";
             }
             else load2cfg(argc, argv);
 
-            if(ishelp)
-            {
-                info_helpstr(std::cout, cfg);
-            }
+            if(ishelp) info_helpstr(std::cout);
         }
 
 private:
 
+    Config& cfg;
+
+    using foo_t = std::function<void(std::string)>;
+    using S     = const std::string&;
+
     const std::array<foo_t, 6> F
     {
-        [](S s){_cfg.depth      = std::stoi(s) % 256          ;},
-        [](S s){_cfg.is_log     = s == "false" ? false : true ;},
-        [](S s){_cfg.remove     = s == "false" ? false : true ;},
-        [](S s){_cfg.quality    = std::stoi(s) % 100          ;},
-        [](S s){_cfg.downsample = s == "true"  ? true  : false;},
-        [](S s){_cfg.basename   = s                           ;}
+        [&](S s){cfg.depth      = std::stoi(s) % 256          ;},
+        [&](S s){cfg.is_log     = s == "false" ? false : true ;},
+        [&](S s){cfg.remove     = s == "false" ? false : true ;},
+        [&](S s){cfg.quality    = std::stoi(s) % 100          ;},
+        [&](S s){cfg.downsample = s == "true"  ? true  : false;},
+        [&](S s){cfg.basename   = s                           ;}
     };
 
-    const std::map<std::string, foo_t> dic
+    const std::map<std::string_view, foo_t> dic
     {
         {"-depth_recursive", F[0]},
         {"-is_log"         , F[1]},
@@ -55,7 +55,7 @@ private:
         for (int i = 1; i < argc; ++i)
         {
             try
-            {   if(std::string(argv[i]) == "-h")
+            {   if(std::string_view(argv[i]) == "-h")
                 {
                 /// std::cout << HELP_STR;
                     ishelp = true;
@@ -64,18 +64,18 @@ private:
 
             }
             catch(std::string err)
-            {   std::cerr << "\n>>>" << err  << "!!!\n\n";;
+            {   std::cout << "\n>>>" << err  << "!!!\n\n";;
             }
             catch(...)
-            {   std::cerr << "\n>>> Argunent ERROR : " << argv[i] <<" !!!\n\n";
+            {   std::cout << "\n>>> Argunent ERROR : " << argv[i] <<" !!!\n\n";
             }
         }
     }
 
-    void step_one(std::string s)
-    {   auto p  = s.find(":");
-        std::string s1 = s.substr(0, p++);
-        std::string s2 = s.substr(p, s.size() - p);
+    void step_one(std::string_view s)
+    {             size_t p  = s.find  (":");
+        std::string_view s1 = s.substr(0, p++);
+        std::string_view s2 = s.substr(p, s.size() - p);
 
         l(s1)
         l(s2)
@@ -84,41 +84,46 @@ private:
         if(auto i = dic.find(s1); i != dic.end())
         {
             try
-            {   i->second(std::string(trim(s2)));
+            {   i->second(std::string(s2));
             }
             catch(...)
-            {   throw std::string("Argument value is ERROR: ") + s2;
+            {   throw std::string("Argument value is ERROR: ") + s2.data();
             }
         }
-        else throw std::string("Argument name is ERROR: ") + s1;
+        else throw std::string("Argument name is ERROR: ") + s1.data();
     }
 
-    static std::string bool2str(bool b)
+    std::string bool2str(bool b) const
     {   std::string s(b ? "true" : "false");
-        s.resize(_cfg.get_etalon_length(), ' ');
+        s.resize(cfg.get_etalon_length(), ' ');
         return s;
     }
 
-    static std::string int2str(int n)
+    std::string _int2str(int n) const
     {   std::string s = std::to_string(n);
-        s.resize(_cfg.get_etalon_length(), ' ');
+        s.resize(cfg.get_etalon_length(), ' ');
         return s;
     }
 
-    static void info_helpstr(std::ostream& o, Config& cfg)
+    void info_helpstr(std::ostream& o) const
     {
+        const auto ETALON = cfg.get_etalon_length();
+
+        auto a = std::string(cfg.basename);
+             a.resize       (ETALON,  ' ');
+
         o << std::format( HELP_STR  ,
-             int2str(cfg.depth     ),
+            _int2str(cfg.depth     ),
             bool2str(cfg.is_log    ),
             bool2str(cfg.remove    ),
-             int2str(cfg.quality   ),
+            _int2str(cfg.quality   ),
             bool2str(cfg.downsample),
-            cfg.basename            ,
-            std::string(cfg.basename.size(), ' ')
+            a,
+            std::string(ETALON,  ' ')
         );
     }
 
-    static std::string_view trim(std::string_view s)
+    inline std::string_view trim(std::string_view s)
     {   return myls::trim_suffix(s);
     }
 
