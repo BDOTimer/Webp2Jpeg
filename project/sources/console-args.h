@@ -134,8 +134,5 @@ public:
     }
 };
 
-
-
-
 #endif // CONSOLE_ARGS_H
 
