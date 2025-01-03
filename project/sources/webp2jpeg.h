@@ -12,7 +12,7 @@ struct  Webp2Jpeg
 
     int go()
     {
-        err_t err{GOOD};
+        err_t err = NO;
 
         ///------------------|
         /// Поставщик файлов.|
@@ -40,8 +40,7 @@ struct  Webp2Jpeg
         for(const auto& path : fcargo)
         {
             log1 << "----------------------------------------------log1:\n";
-
-            log << "  " << path.string() << '\n';
+            log  << "  " << path.string() << '\n';
 
             if(err = decodeWebp.go(path); err)
             {
@@ -63,11 +62,11 @@ struct  Webp2Jpeg
             ///---------------------------|
             /// Кодировщик в файл.        |
             ///---------------------------:
-            Encode2Jpeg encode2Jpeg(_2file);
+            Encode2Jpeg encode2Jpeg   (_2file);
+            err       = encode2Jpeg.go(decodeWebp);
 
-            if(err = encode2Jpeg.go(decodeWebp); err)
-            {
-                log1 << "  status             : ERROR ...\n";
+            if(err)
+            {   log1 << "  status             : ERROR ...\n";
             }
             else
             {
@@ -91,23 +90,26 @@ struct  Webp2Jpeg
 
     static int test_work()
     {
-        Webp2Jpeg  webp2Jpeg;
-        auto err = webp2Jpeg.go();
-                 l(webp2Jpeg.log.str())
+        Webp2Jpeg   webp2Jpeg;
+        err_t err = webp2Jpeg.go();
+                  l(webp2Jpeg.log.str())
 
         return err;
     }
 
     std::stringstream log{};
 
-    static int test();
+private:
+    TEST();
 };
 
 ///----------------------------------------------------------------------------|
 /// Тест.
 ///----------------------------------------------------------------------------:
-int Webp2Jpeg::test()
+err_t Webp2Jpeg::test()
 {
+    err_t err = NO;
+
     ///------------------|
     /// Поставщик файлов.|
     ///------------------:
@@ -124,15 +126,15 @@ int Webp2Jpeg::test()
     /// myDecodeWebp битмапы.         |
     ///-------------------------------:
     myDecodeWebp decodeWebp;
-                 decodeWebp.go(fcargo[0]);
+    err       |= decodeWebp.go(fcargo[0]);
 
     ///-------------------------------|
     /// Кодировщик в файл.            |
     ///-------------------------------:
-    Encode2Jpeg encode2Jpeg(_2file);
-    int    ok = encode2Jpeg.go(decodeWebp);
+    Encode2Jpeg encode2Jpeg   (_2file);
+    err      |= encode2Jpeg.go(decodeWebp);
 
-    return ok;
+    return err;
 }
 
 ///----------------------------------------------------------------------------|
@@ -149,12 +151,12 @@ inline int run()
               << ((ver >>  8) & 0xFF) << '.'
               <<  (ver        & 0xFF) << std::endl;
 
-    int err = Webp2Jpeg::test_work();
+    err_t err = Webp2Jpeg::test_work();
 
     std::cout << log_must;
 
-    if(0 == err) std::cout << "ПРОГРАММА УСПЕШНО ЗАВЕРШИЛА РАБОТУ!\n\n";
-    else         std::cout << "ПРОГРАММА ЗАВЕРШИЛА РАБОТУ С ОШИБКОЙ!\n\n";
+    if(!err) std::cout << "ПРОГРАММА УСПЕШНО ЗАВЕРШИЛА РАБОТУ!\n\n";
+    else     std::cout << "ПРОГРАММА ЗАВЕРШИЛА РАБОТУ С ОШИБКОЙ!\n\n";
 
 #ifdef    MYDEBUG
     std::cin.get();

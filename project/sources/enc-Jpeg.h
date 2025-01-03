@@ -104,7 +104,7 @@ struct  Encode2Jpeg
 
     err_t go(const Bitmap& bmp)
     {
-        auto ok = TooJpeg::writeJpeg
+        bool ok = TooJpeg::writeJpeg
         (
             _2File::myOutput,
              bmp.datain     , (ushort)(bmp.width), (ushort)(bmp.height),
@@ -117,21 +117,21 @@ struct  Encode2Jpeg
     {   _2file.openfile(filename);
     }
 
-    static std::string info_ok(const Encode2Jpeg& enc, int ok)
+    static std::string info_ok(const Encode2Jpeg& enc, err_t err)
     {   return std::string(enc._2file.filename) + " : "
-                                                + (ok == 0 ? "good" : "failed");
+                                                + (err ? "failed" : "good");
     };
 
-    static int test();
-
 private:
+    TEST();
+
     _2File& _2file;
 };
 
 ///----------------------------------------------------------------------------|
 /// Тест.
 ///----------------------------------------------------------------------------:
-int Encode2Jpeg::test()
+err_t Encode2Jpeg::test()
 {
     ///-------------------------------|
     /// Файл для записи данных.       |
@@ -148,21 +148,21 @@ int Encode2Jpeg::test()
     ///-------------------------------|
     /// Кодировщик в файл.            |
     ///-------------------------------:
-    Encode2Jpeg encode2Jpeg(_2file);
-    int    ok = encode2Jpeg.go(generator42);
+    Encode2Jpeg encode2Jpeg   (_2file);
+    err_t err = encode2Jpeg.go(generator42);
 
-    l(Encode2Jpeg::info_ok(encode2Jpeg, ok));
+    l(Encode2Jpeg::info_ok(encode2Jpeg, err));
 
     {   generator42.width  = 700;
         generator42.height = 300;
 
         encode2Jpeg.openfile("ex123.jpg");
-        ok += encode2Jpeg.go(generator42);
+        err |= encode2Jpeg.go(generator42);
 
-        l(Encode2Jpeg::info_ok(encode2Jpeg, ok));
+        l(Encode2Jpeg::info_ok(encode2Jpeg, err));
     }
 
-    return ok;
+    return err;
 }
 
 #endif // ENC_JPEG_H

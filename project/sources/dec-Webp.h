@@ -11,10 +11,6 @@
 
 using buf_t = std::vector<uint8_t>;
 
-using err_t     = bool ;
-const bool ERR  = true ;
-const bool GOOD = false;
-
 ///----------------------------------------------------------------------------|
 /// Декодер webp.
 ///----------------------------------------------------------------------------:
@@ -53,12 +49,11 @@ struct  myDecodeWebp    : Bitmap
 
         Bitmap::datain = (uchar*)dataout;
 
-        return success == 0 ? ERR : GOOD;
+        return success == 0 ? YES : NO;
     }
 
 private:
-    friend bool tests();
-    static void test ()
+    TEST()
     {   std::cout << "STARTTEST myDecodeWebp::test() ...\n";
 
         ///------------------|
@@ -67,13 +62,15 @@ private:
         FilesCargo filesCargo;
                  l(filesCargo.debug())
 
-        if(filesCargo.empty()) return;
+        if(filesCargo.empty()) return YES;
 
         myDecodeWebp mydec;
-                     mydec.go(filesCargo[0]);
+        err_t status = mydec.go(filesCargo[0]);
 
         l(filesCargo[0].string())
         std::cout << mydec.info() << '\n';
+
+        return status;
     }
 
     uint8_t* dataout = nullptr;

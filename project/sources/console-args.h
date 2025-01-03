@@ -18,7 +18,7 @@ struct  ConsoleArg
             }
             else load2cfg(argc, argv);
 
-            if(ishelp) info_helpstr(std::cout);
+            if(ishelp) std::cout << info_help();
         }
 
 private:
@@ -55,16 +55,11 @@ private:
         for (int i = 1; i < argc; ++i)
         {
             try
-            {   if(std::string_view(argv[i]) == "-h")
-                {
-                /// std::cout << HELP_STR;
-                    ishelp = true;
-                }
-                else step_one(argv[i]);
-
+            {   if(std::string_view(argv[i]) == "-h") ishelp  =    true;
+                else                                  step_one(argv[i]);
             }
             catch(std::string err)
-            {   std::cout << "\n>>>" << err  << "!!!\n\n";;
+            {   std::cout << "\n>>>" << err  << "!!!\n\n";
             }
             catch(...)
             {   std::cout << "\n>>> Argunent ERROR : " << argv[i] <<" !!!\n\n";
@@ -105,8 +100,10 @@ private:
         return s;
     }
 
-    void info_helpstr(std::ostream& o) const
+    std::string info_help() const
     {
+        std::stringstream o;
+
         const auto ETALON = cfg.get_etalon_length();
 
         auto a = std::string(cfg.basename);
@@ -119,8 +116,9 @@ private:
             _int2str(cfg.quality   ),
             bool2str(cfg.downsample),
             a,
-            std::string(ETALON,  ' ')
+            std::string(ETALON, ' ')
         );
+        return o.str();
     }
 
     inline std::string_view trim(std::string_view s)

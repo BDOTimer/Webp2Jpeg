@@ -1,5 +1,8 @@
 #ifndef CONFIG_H
 #define CONFIG_H
+///----------------------------------------------------------------------------|
+/// Конфигурато. Виден глобально из всех точек программы.
+///----------------------------------------------------------------------------:
 
 #include <string>
 #include <format>
@@ -14,11 +17,13 @@
     #define SIGNAL
 #endif // MYDEBUG
 
-extern const char* LOGOVERSION;
+#define TEST friend bool tests(); static err_t test
+
+extern const char* const LOGOVERSION;
 
 constexpr const char* HELP_STR = R"(
 ///------------------------------------------------------------------------Help:
-/// Дефолтные флаги для строки аргументов:
+/// Текущие флаги в настройке конвертера:
 ///   -depth_recursive: {} - глубина рекурсии для поиска входных файлов.
 ///   -is_log:          {} - включить логирование.
 ///   -remove_webm:     {} - удалять отсканированные входные файлы.
@@ -45,7 +50,7 @@ struct  Config
         Config          (const Config&) = delete;
         Config operator=(const Config&) = delete;
 
-    std::string EXE_NAME     = "webp2jpg-rc5";
+    std::string EXE_NAME     = "webp2jpg-rc2";
     const char* LOGOVERSION  = ::LOGOVERSION;
 
     const std::string source = ".webp";
@@ -77,10 +82,8 @@ struct  Config
 
     void init_filename(std::string_view dir)
     {
-        auto   p = dir.rfind("\\") + 1;
-        EXE_NAME = dir.substr(p, dir.size() - p);
-
-        l(EXE_NAME)
+        const auto p = dir.rfind("\\") + 1;
+        EXE_NAME     = dir.substr(p, dir.size() - p);
     }
 
     unsigned get_etalon_length() const
